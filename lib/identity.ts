@@ -8,7 +8,6 @@ function randomId(): string {
   return `user_${Math.random().toString(36).slice(2)}_${Date.now()}`;
 }
 
-/** Gets (or creates) a stable anonymous user id for this browser. */
 export function getUserId(): string {
   if (typeof window === "undefined") return "";
   let id = window.localStorage.getItem(USER_ID_KEY);

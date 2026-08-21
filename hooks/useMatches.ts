@@ -30,19 +30,16 @@ export function useMatches() {
     }
   }, []);
 
-  // Re-sync the full list whenever the socket reconnects, in case matches
-  // finished, started, or updated while we were offline.
+  
   const connectionState = useConnectionStatus(load);
 
   useEffect(() => {
     load();
-    // Poll as a fallback so matches that start/finish (entering or leaving
-    // the board) still show up even if a subscribe event is missed.
+    
     const pollId = setInterval(load, 30000);
     return () => clearInterval(pollId);
   }, [load]);
 
-  // Keep socket subscriptions in sync with whichever matches are on screen.
   useEffect(() => {
     const socket = getSocket();
     const currentIds = new Set(matches.map((m) => m.id));
@@ -94,7 +91,6 @@ export function useMatches() {
     };
   }, []);
 
-  // Unsubscribe from everything on unmount.
   useEffect(() => {
     const socket = getSocket();
     const subscribed = subscribedIdsRef.current;

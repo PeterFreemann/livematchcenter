@@ -22,14 +22,9 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   try {
     res = await fetch(`${API_BASE_URL}${path}`, {
       ...init,
-      // Match data changes every second server-side; never let the browser
-      // or a CDN cache these responses.
+      
       cache: "no-store",
-      // No Content-Type header here: these are all GET requests with no
-      // body, and adding Content-Type: application/json turns them into
-      // a "non-simple" CORS request, forcing a preflight OPTIONS call.
-      // The backend doesn't implement OPTIONS on these routes, so the
-      // preflight 404s and the real request never goes out.
+      
       headers: { ...(init?.headers ?? {}) },
     });
   } catch (err) {

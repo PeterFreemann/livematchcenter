@@ -4,10 +4,7 @@ import { useEffect, useState } from "react";
 import { getSocket } from "@/lib/socket";
 import type { ConnectionState } from "@/lib/types";
 
-/**
- * Tracks the shared socket's connection state so the UI can show a
- * "reconnecting" banner and callers can re-sync state once we're back.
- */
+
 export function useConnectionStatus(onReconnected?: () => void) {
   const [state, setState] = useState<ConnectionState>("connecting");
 

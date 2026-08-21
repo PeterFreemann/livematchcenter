@@ -31,8 +31,7 @@ export function useMatchDetail(matchId: string) {
     }
   }, [matchId]);
 
-  // If we lost connection mid-match, re-fetch on reconnect so events/stats
-  // that happened while offline aren't silently missing from the timeline.
+  
   const connectionState = useConnectionStatus(load);
 
   useEffect(() => {
